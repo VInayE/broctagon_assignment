@@ -11,6 +11,7 @@ Vue.use(VueResource)
 window.Vue = Vue
 
 /* eslint-disable no-new */
+
 new Vue({
   el: '#app',
   router,

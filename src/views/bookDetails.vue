@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="Object.keys(bookDetails).length>0">
+      <button @click="backToList()">Back</button>
       <span>Book Name : </span>
       {{bookDetails.name}}<br>
       <span>Number Of Pages : </span>
@@ -9,38 +10,42 @@
       {{bookDetails.authors[0]}}
       <br>
       <span>Characters : </span>
-      <select>
-          <option v-for="characters in bookDetails.characters">{{characters}}</option>
-      </select>
+      <select v-model="charac">
+          <option v-for="characters in bookDetails.characters" >{{characters}}</option>
+      </select><br><br><br><br>
+      <character-details :charac=charac></character-details>
   </div>
 </template>
 <script>
    import router from '../router'
-   import {getBookDetails} from '../api/api'
+   import {getBookDetails,charactersDetails} from '../api/api'
    export default {
      props:[],
      components:{
-        
+        CharacterDetails : () => import('../components/characterDetails'),
      },
      watch:{
-     
      },
      data () {
        return {
           bookID:'',
-          bookDetails:[]   
+          bookDetails:[],
+          charac:''
        }  
      },
      created(){   
       this.bookID = this.$route.query.bookID
       getBookDetails(this.bookID).then(response => {
             this.bookDetails = response.data
+            this.charac = this.bookDetails.characters[0]
         }).catch(error => {
                 console.log(error) 
         });
      },
      methods:{
-     
+        backToList(){
+            router.push({name:'GotBooks'}) 
+        }
      }
    }
 </script>

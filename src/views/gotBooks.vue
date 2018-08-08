@@ -34,7 +34,8 @@
      },
      methods:{
          viewDetails(url){
-            let lastChar = url.slice(-1);
+            var indx = url.lastIndexOf('/')
+            var lastChar = url.substr(indx+1, url.length);
              router.push({
                  name:'BookDetails',
                  query:{
