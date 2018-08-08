@@ -22,4 +22,5 @@ export default {
 #app *{
         box-sizing: border-box;
     }
+
 </style>

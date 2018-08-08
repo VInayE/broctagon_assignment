@@ -1,5 +1,6 @@
 <template>
   <div v-if="Object.keys(bookDetails).length>0">
+
       <button @click="backToList()" class="back">Back</button>
       <div class="spacer10"></div>
       <div class="spacer10"></div>
@@ -25,6 +26,7 @@
       <div class="spacer10"></div>
       <character-details :charac=charac></character-details>
       </div>
+
   </div>
 </template>
 <script>
@@ -90,4 +92,5 @@
       border-bottom: 3px solid #6cd;
       background:#f1f1f1;
     }
+
 </style>
