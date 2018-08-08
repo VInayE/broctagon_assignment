@@ -1,7 +1,8 @@
 <template>
   <div>
+      <input style="padding-left:10px;padding-right:10px;" name="input-2-3"  placeholder="Search Books" v-model="search">
       <ul>
-          <li v-for="(books,index) in bookList" :key="index">
+          <li v-for="(books,index) in bookListFilteredData" :key="index">
           {{books.name}}
           <button @click="viewDetails(books.url)">View Details</button>
           </li>
@@ -22,12 +23,19 @@
        return {
            bookList:[],
            openbookDetails:false,
-           bookDetailUrl:''
+           bookDetailUrl:'',
+           search:''
        }  
      },
      created(){   
         getBooks().then(response => {
             this.bookList = response.data
+            this.bookList.sort(function(a, b) {
+            var textA = a.name.toUpperCase();
+            var textB = b.name.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            });
+            console.log(this.bookList)
         }).catch(error => {
                 console.log(error) 
         });
@@ -44,7 +52,14 @@
              }) 
              
          }
-     }
+     },
+     computed:{
+        bookListFilteredData:function()
+    {
+       var self=this;
+       return this.bookList.filter(function(book){return book.name.toLowerCase().indexOf(self.search.toLowerCase())>=0;});
+    }
+    }    
    }
 </script>
 <style>
