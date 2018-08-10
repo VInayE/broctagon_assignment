@@ -21,6 +21,7 @@
       <div class="details">
       <span>Characters : </span>
       <select v-model="charac" style="font-size: 12px;">
+          <option>Select Characters</option>
           <option v-for="characters in bookDetails.characters" >{{characters}}</option>
       </select>
       <div class="spacer10"></div>
