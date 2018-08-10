@@ -25,6 +25,7 @@
           <option v-for="characters in bookDetails.characters" >{{characters}}</option>
       </select>
       <div class="spacer10"></div>
+<!--      This is component to see the particular character      -->
       <character-details :charac=charac></character-details>
       </div>
 
@@ -49,6 +50,7 @@
      },
      created(){   
       this.bookID = this.$route.query.bookID
+      //API Call to fetch the book details
       getBookDetails(this.bookID).then(response => {
             this.bookDetails = response.data
             this.charac = this.bookDetails.characters[0]
@@ -57,6 +59,7 @@
         });
      },
      methods:{
+        //Navigate to Home Page 
         backToList(){
             router.push({name:'GotBooks'}) 
         }

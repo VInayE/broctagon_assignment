@@ -27,21 +27,24 @@
            search:''
        }  
      },
-     created(){   
+     created(){  
+        //API call to fetch the book list
         getBooks().then(response => {
             this.bookList = response.data
+            //Sorting Data
             this.bookList.sort(function(a, b) {
             var textA = a.name.toUpperCase();
             var textB = b.name.toUpperCase();
             return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
             });
-            console.log(this.bookList)
         }).catch(error => {
                 console.log(error) 
         });
      },
      methods:{
+         //View Book Details click
          viewDetails(url){
+            //Get the Book ID from URL 
             var indx = url.lastIndexOf('/')
             var lastChar = url.substr(indx+1, url.length);
              router.push({
@@ -54,6 +57,7 @@
          }
      },
      computed:{
+         //Filter function
         bookListFilteredData:function()
     {
        var self=this;
